@@ -2,20 +2,14 @@ import { Form, TextField, PasswordField, Submit } from '@redwoodjs/web'
 import { useAuth } from '@redwoodjs/auth'
 import { navigate, routes } from '@redwoodjs/router'
 
-const SignupPage = () => {
-  const { client } = useAuth()
+const SigninPage = () => {
+  const { logIn } = useAuth()
   const [error, setError] = React.useState(null)
 
   const onSubmit = (data) => {
-    client
-      .signup(data.email, data.password)
-      .then(() => signIn(data.email, data.password))
-      .catch((error) => setError(error))
-  }
-
-  const signIn = (email, password) => {
-    logIn(email, password)
-    then((res) => navigate(routes.home())).catch((error) =>
+    setError(null)
+    logIn(data.email, data.password)
+    then(() => navigate(routes.home())).catch((error) =>
       setError(error.message)
     )
   }
@@ -30,4 +24,4 @@ const SignupPage = () => {
   )
 }
 
-export default SignupPage
+export default SigninPage
